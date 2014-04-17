@@ -1,0 +1,817 @@
+#:kivy 1.0.9
+
+<PacMan>:
+    source: ''
+    canvas:
+        Color:
+            rgb: 1, 1, 1
+        Rectangle:
+            source: self.source
+            pos: self.pos
+            size: self.size
+
+<Ghost>:
+    color: ''
+    source: ''
+    canvas:
+        Color:
+            rgb: 1, 1, 1
+        Rectangle:
+            source: self.source
+            pos: self.pos
+            size: self.size
+
+<Wall>:
+    canvas:
+        Color:
+            rgb: 0.2, 0.2, 0.2
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<Pellet>:
+    canvas:
+        Color:
+            rgb: 0, 1, 0
+        Ellipse:
+            pos: self.center_x-self.width*0.2, self.center_y-self.height*0.2
+            size: self.width*0.4, self.height*0.4
+
+<Pill>:
+    canvas:
+        Color:
+            rgb: 1, 1, 1
+        Ellipse:
+            pos: self.center_x-self.width*0.25, self.center_y-self.height*0.25
+            size: self.width*0.5, self.height*0.5
+
+<PacManGame>:
+    pacman: pacman
+    red: red
+    orange: orange
+    teal: teal
+    pink: pink
+    score_label: score_label
+    state_label: state_label
+    p1_2: p1_2
+    p1_3: p1_3
+    p1_4: p1_4
+    p1_5: p1_5
+    p1_6: p1_6
+    p1_7: p1_7
+    p1_8: p1_8
+    p2_1: p2_1
+    p2_5: p2_5
+    p2_9: p2_9
+    p3_1: p3_1
+    p3_3: p3_3
+    p3_4: p3_4
+    p3_5: p3_5
+    p3_6: p3_6
+    p3_7: p3_7
+    p3_9: p3_9
+    p4_1: p4_1
+    p4_2: p4_2
+    p4_3: p4_3
+    p4_5: p4_5
+    p4_7: p4_7
+    p4_8: p4_8
+    p4_9: p4_9
+    p5_3: p5_3
+    p5_5: p5_5
+    p5_7: p5_7
+    p6_1: p6_1
+    p6_2: p6_2
+    p6_3: p6_3
+    p6_4: p6_4
+    p6_5: p6_5
+    p6_6: p6_6
+    p6_7: p6_7
+    p6_8: p6_8
+    p6_9: p6_9
+    p7_1: p7_1
+    p7_3: p7_3
+    p7_7: p7_7
+    p7_9: p7_9
+    p8_1: p8_1
+    p8_3: p8_3
+    p8_7: p8_7
+    p8_9: p8_9
+    p9_1: p9_1
+    p9_3: p9_3
+    p9_7: p9_7
+    p9_9: p9_9
+    p10_1: p10_1
+    p10_3: p10_3
+    p10_7: p10_7
+    p10_9: p10_9
+    p11_1: p11_1
+    p11_3: p11_3
+    p11_7: p11_7
+    p11_9: p11_9
+    p12_1: p12_1
+    p12_3: p12_3
+    p12_7: p12_7
+    p12_9: p12_9
+    p13_1: p13_1
+    p13_2: p13_2
+    p13_3: p13_3
+    p13_4: p13_4
+    p13_5: p13_5
+    p13_6: p13_6
+    p13_7: p13_7
+    p13_8: p13_8
+    p13_9: p13_9
+    p14_3: p14_3
+    p14_5: p14_5
+    p14_7: p14_7
+    p15_1: p15_1
+    p15_2: p15_2
+    p15_3: p15_3
+    p15_5: p15_5
+    p15_7: p15_7
+    p15_8: p15_8
+    p15_9: p15_9
+    p16_1: p16_1
+    p16_3: p16_3
+    p16_4: p16_4
+    p16_5: p16_5
+    p16_6: p16_6
+    p16_7: p16_7
+    p16_9: p16_9
+    p17_1: p17_1
+    p17_5: p17_5
+    p17_9: p17_9
+    p18_2: p18_2
+    p18_3: p18_3
+    p18_4: p18_4
+    p18_5: p18_5
+    p18_6: p18_6
+    p18_7: p18_7
+    p18_8: p18_8
+    pill1_1: pill1_1
+    pill1_9: pill1_9
+    pill18_1: pill18_1
+    pill18_9: pill18_9
+
+    #border
+    Wall:
+        size: 20*root.width/20, root.height/11.25
+        pos: 0*root.width/20, 0*root.height/11.25
+    
+    Wall:
+        size: 20*root.width/20, root.height/11.25
+        pos: 0*root.width/20, 10*root.height/11.25
+    
+    Wall:
+        size: root.width/20, 5*root.height/11.25
+        pos: 0*root.width/20, 0*root.height/11.25
+    Wall:
+        size: root.width/20, 5*root.height/11.25
+        pos: 0*root.width/20, 6*root.height/11.25
+    
+    Wall:
+        size: root.width/20, 5*root.height/11.25
+        pos: 19*root.width/20, 0*root.height/11.25
+    Wall:
+        size: root.width/20, 5*root.height/11.25
+        pos: 19*root.width/20, 6*root.height/11.25
+    
+    #attached lines
+    Wall:
+        size: root.width/20, 3*root.height/11.25
+        pos: 5*root.width/20, 0*root.height/11.25
+    
+    Wall:
+        size: root.width/20, 3*root.height/11.25
+        pos: 5*root.width/20, 8*root.height/11.25
+    
+    Wall:
+        size: root.width/20, 3*root.height/11.25
+        pos: 14*root.width/20, 0*root.height/11.25
+    
+    Wall:
+        size: root.width/20, 3*root.height/11.25
+        pos: 14*root.width/20, 8*root.height/11.25
+    
+    #L shapes
+    Wall:
+        size: root.width/20, 3*root.height/11.25
+        pos: 2*root.width/20, 2*root.height/11.25
+    Wall:
+        size: 2*root.width/20, root.height/11.25
+        pos: 2*root.width/20, 2*root.height/11.25
+    
+    Wall:
+        size: root.width/20, 3*root.height/11.25
+        pos: 2*root.width/20, 6*root.height/11.25
+    Wall:
+        size: 2*root.width/20, root.height/11.25
+        pos: 2*root.width/20, 8*root.height/11.25
+    
+    Wall:
+        size: root.width/20, 3*root.height/11.25
+        pos: 17*root.width/20, 2*root.height/11.25
+    Wall:
+        size: 2*root.width/20, root.height/11.25
+        pos: 16*root.width/20, 2*root.height/11.25
+    
+    Wall:
+        size: root.width/20, 3*root.height/11.25
+        pos: 17*root.width/20, 6*root.height/11.25
+    Wall:
+        size: 2*root.width/20, root.height/11.25
+        pos: 16*root.width/20, 8*root.height/11.25
+    
+    #short lines
+    Wall:
+        size: 2*root.width/20, root.height/11.25
+        pos: 4*root.width/20, 4*root.height/11.25
+    
+    Wall:
+        size: 2*root.width/20, root.height/11.25
+        pos: 4*root.width/20, 6*root.height/11.25
+    
+    Wall:
+        size: 2*root.width/20, root.height/11.25
+        pos: 14*root.width/20, 4*root.height/11.25
+    
+    Wall:
+        size: 2*root.width/20, root.height/11.25
+        pos: 14*root.width/20, 6*root.height/11.25
+    
+    #long lines
+    Wall:
+        size: 6*root.width/20, root.height/11.25
+        pos: 7*root.width/20, 2*root.height/11.25
+    
+    Wall:
+        size: 6*root.width/20, root.height/11.25
+        pos: 7*root.width/20, 8*root.height/11.25
+    
+    #box
+    Wall:
+        size: 6*root.width/20, root.height/11.25
+        pos: 7*root.width/20, 4*root.height/11.25
+    Wall:
+        size: root.width/20, 3*root.height/11.25
+        pos: 7*root.width/20, 4*root.height/11.25
+    Wall:
+        size: root.width/20, 3*root.height/11.25
+        pos: 12*root.width/20, 4*root.height/11.25
+    Wall:
+        size: 2*root.width/20, root.height/11.25
+        pos: 7*root.width/20, 6*root.height/11.25
+    Wall:
+        size: 2*root.width/20, root.height/11.25
+        pos: 11*root.width/20, 6*root.height/11.25
+        
+    Label:
+        id: score_label
+        font_size: 50
+        center_x: root.width/2
+        center_y: 10.5*root.height/11.25
+        text: "Score: 0"
+    
+    Label:
+        id: state_label
+        font_size: 50
+        center_x: root.width/2
+        center_y: 0.5*root.height/11.25
+        text: ""
+    
+    Pellet:
+        id: p1_2
+        gridpos: 1, 2
+        size: root.width/20, root.height/11.25
+        pos: 1*root.width/20, 2*root.height/11.25
+    Pellet:
+        id: p1_3
+        gridpos: 1, 3
+        size: root.width/20, root.height/11.25
+        pos: 1*root.width/20, 3*root.height/11.25
+    Pellet:
+        id: p1_4
+        gridpos: 1, 4
+        size: root.width/20, root.height/11.25
+        pos: 1*root.width/20, 4*root.height/11.25
+    Pellet:
+        id: p1_5
+        gridpos: 1, 5
+        size: root.width/20, root.height/11.25
+        pos: 1*root.width/20, 5*root.height/11.25
+    Pellet:
+        id: p1_6
+        gridpos: 1, 6
+        size: root.width/20, root.height/11.25
+        pos: 1*root.width/20, 6*root.height/11.25
+    Pellet:
+        id: p1_7
+        gridpos: 1, 7
+        size: root.width/20, root.height/11.25
+        pos: 1*root.width/20, 7*root.height/11.25
+    Pellet:
+        id: p1_8
+        gridpos: 1, 8
+        size: root.width/20, root.height/11.25
+        pos: 1*root.width/20, 8*root.height/11.25
+    Pellet:
+        id: p2_1
+        gridpos: 2, 1
+        size: root.width/20, root.height/11.25
+        pos: 2*root.width/20, 1*root.height/11.25
+    Pellet:
+        id: p2_5
+        gridpos: 2, 5
+        size: root.width/20, root.height/11.25
+        pos: 2*root.width/20, 5*root.height/11.25
+    Pellet:
+        id: p2_9
+        gridpos: 2, 9
+        size: root.width/20, root.height/11.25
+        pos: 2*root.width/20, 9*root.height/11.25
+    Pellet:
+        id: p3_1
+        gridpos: 3, 1
+        size: root.width/20, root.height/11.25
+        pos: 3*root.width/20, 1*root.height/11.25
+    Pellet:
+        id: p3_3
+        gridpos: 3, 3
+        size: root.width/20, root.height/11.25
+        pos: 3*root.width/20, 3*root.height/11.25
+    Pellet:
+        id: p3_4
+        gridpos: 3, 4
+        size: root.width/20, root.height/11.25
+        pos: 3*root.width/20, 4*root.height/11.25
+    Pellet:
+        id: p3_5
+        gridpos: 3, 5
+        size: root.width/20, root.height/11.25
+        pos: 3*root.width/20, 5*root.height/11.25
+    Pellet:
+        id: p3_6
+        gridpos: 3, 6
+        size: root.width/20, root.height/11.25
+        pos: 3*root.width/20, 6*root.height/11.25
+    Pellet:
+        id: p3_7
+        gridpos: 3, 7
+        size: root.width/20, root.height/11.25
+        pos: 3*root.width/20, 7*root.height/11.25
+    Pellet:
+        id: p3_9
+        gridpos: 3, 9
+        size: root.width/20, root.height/11.25
+        pos: 3*root.width/20, 9*root.height/11.25
+    Pellet:
+        id: p4_1
+        gridpos: 4, 1
+        size: root.width/20, root.height/11.25
+        pos: 4*root.width/20, 1*root.height/11.25
+    Pellet:
+        id: p4_2
+        gridpos: 4, 2
+        size: root.width/20, root.height/11.25
+        pos: 4*root.width/20, 2*root.height/11.25
+    Pellet:
+        id: p4_3
+        gridpos: 4, 3
+        size: root.width/20, root.height/11.25
+        pos: 4*root.width/20, 3*root.height/11.25
+    Pellet:
+        id: p4_5
+        gridpos: 4, 5
+        size: root.width/20, root.height/11.25
+        pos: 4*root.width/20, 5*root.height/11.25
+    Pellet:
+        id: p4_7
+        gridpos: 4, 7
+        size: root.width/20, root.height/11.25
+        pos: 4*root.width/20, 7*root.height/11.25
+    Pellet:
+        id: p4_8
+        gridpos: 4, 8
+        size: root.width/20, root.height/11.25
+        pos: 4*root.width/20, 8*root.height/11.25
+    Pellet:
+        id: p4_9
+        gridpos: 4, 9
+        size: root.width/20, root.height/11.25
+        pos: 4*root.width/20, 9*root.height/11.25
+    Pellet:
+        id: p5_3
+        gridpos: 5, 3
+        size: root.width/20, root.height/11.25
+        pos: 5*root.width/20, 3*root.height/11.25
+    Pellet:
+        id: p5_5
+        gridpos: 5, 5
+        size: root.width/20, root.height/11.25
+        pos: 5*root.width/20, 5*root.height/11.25
+    Pellet:
+        id: p5_7
+        gridpos: 5, 7
+        size: root.width/20, root.height/11.25
+        pos: 5*root.width/20, 7*root.height/11.25
+    Pellet:
+        id: p6_1
+        gridpos: 6, 1
+        size: root.width/20, root.height/11.25
+        pos: 6*root.width/20, 1*root.height/11.25
+    Pellet:
+        id: p6_2
+        gridpos: 6, 2
+        size: root.width/20, root.height/11.25
+        pos: 6*root.width/20, 2*root.height/11.25
+    Pellet:
+        id: p6_3
+        gridpos: 6, 3
+        size: root.width/20, root.height/11.25
+        pos: 6*root.width/20, 3*root.height/11.25
+    Pellet:
+        id: p6_4
+        gridpos: 6, 4
+        size: root.width/20, root.height/11.25
+        pos: 6*root.width/20, 4*root.height/11.25
+    Pellet:
+        id: p6_5
+        gridpos: 6, 5
+        size: root.width/20, root.height/11.25
+        pos: 6*root.width/20, 5*root.height/11.25
+    Pellet:
+        id: p6_6
+        gridpos: 6, 6
+        size: root.width/20, root.height/11.25
+        pos: 6*root.width/20, 6*root.height/11.25
+    Pellet:
+        id: p6_7
+        gridpos: 6, 7
+        size: root.width/20, root.height/11.25
+        pos: 6*root.width/20, 7*root.height/11.25
+    Pellet:
+        id: p6_8
+        gridpos: 6, 8
+        size: root.width/20, root.height/11.25
+        pos: 6*root.width/20, 8*root.height/11.25
+    Pellet:
+        id: p6_9
+        gridpos: 6, 9
+        size: root.width/20, root.height/11.25
+        pos: 6*root.width/20, 9*root.height/11.25
+    Pellet:
+        id: p7_1
+        gridpos: 7, 1
+        size: root.width/20, root.height/11.25
+        pos: 7*root.width/20, 1*root.height/11.25
+    Pellet:
+        id: p7_3
+        gridpos: 7, 3
+        size: root.width/20, root.height/11.25
+        pos: 7*root.width/20, 3*root.height/11.25
+    Pellet:
+        id: p7_7
+        gridpos: 7, 7
+        size: root.width/20, root.height/11.25
+        pos: 7*root.width/20, 7*root.height/11.25
+    Pellet:
+        id: p7_9
+        gridpos: 7, 9
+        size: root.width/20, root.height/11.25
+        pos: 7*root.width/20, 9*root.height/11.25
+    Pellet:
+        id: p8_1
+        gridpos: 8, 1
+        size: root.width/20, root.height/11.25
+        pos: 8*root.width/20, 1*root.height/11.25
+    Pellet:
+        id: p8_3
+        gridpos: 8, 3
+        size: root.width/20, root.height/11.25
+        pos: 8*root.width/20, 3*root.height/11.25
+    Pellet:
+        id: p8_7
+        gridpos: 8, 7
+        size: root.width/20, root.height/11.25
+        pos: 8*root.width/20, 7*root.height/11.25
+    Pellet:
+        id: p8_9
+        gridpos: 8, 9
+        size: root.width/20, root.height/11.25
+        pos: 8*root.width/20, 9*root.height/11.25
+    Pellet:
+        id: p9_1
+        gridpos: 9, 1
+        size: root.width/20, root.height/11.25
+        pos: 9*root.width/20, 1*root.height/11.25
+    Pellet:
+        id: p9_3
+        gridpos: 9, 3
+        size: root.width/20, root.height/11.25
+        pos: 9*root.width/20, 3*root.height/11.25
+    Pellet:
+        id: p9_7
+        gridpos: 9, 7
+        size: root.width/20, root.height/11.25
+        pos: 9*root.width/20, 7*root.height/11.25
+    Pellet:
+        id: p9_9
+        gridpos: 9, 9
+        size: root.width/20, root.height/11.25
+        pos: 9*root.width/20, 9*root.height/11.25
+    Pellet:
+        id: p10_1
+        gridpos: 10, 1
+        size: root.width/20, root.height/11.25
+        pos: 10*root.width/20, 1*root.height/11.25
+    Pellet:
+        id: p10_3
+        gridpos: 10, 3
+        size: root.width/20, root.height/11.25
+        pos: 10*root.width/20, 3*root.height/11.25
+    Pellet:
+        id: p10_7
+        gridpos: 10, 7
+        size: root.width/20, root.height/11.25
+        pos: 10*root.width/20, 7*root.height/11.25
+    Pellet:
+        id: p10_9
+        gridpos: 10, 9
+        size: root.width/20, root.height/11.25
+        pos: 10*root.width/20, 9*root.height/11.25
+    Pellet:
+        id: p11_1
+        gridpos: 11, 1
+        size: root.width/20, root.height/11.25
+        pos: 11*root.width/20, 1*root.height/11.25
+    Pellet:
+        id: p11_3
+        gridpos: 11, 3
+        size: root.width/20, root.height/11.25
+        pos: 11*root.width/20, 3*root.height/11.25
+    Pellet:
+        id: p11_7
+        gridpos: 11, 7
+        size: root.width/20, root.height/11.25
+        pos: 11*root.width/20, 7*root.height/11.25
+    Pellet:
+        id: p11_9
+        gridpos: 11, 9
+        size: root.width/20, root.height/11.25
+        pos: 11*root.width/20, 9*root.height/11.25
+    Pellet:
+        id: p12_1
+        gridpos: 12, 1
+        size: root.width/20, root.height/11.25
+        pos: 12*root.width/20, 1*root.height/11.25
+    Pellet:
+        id: p12_3
+        gridpos: 12, 3
+        size: root.width/20, root.height/11.25
+        pos: 12*root.width/20, 3*root.height/11.25
+    Pellet:
+        id: p12_7
+        gridpos: 12, 7
+        size: root.width/20, root.height/11.25
+        pos: 12*root.width/20, 7*root.height/11.25
+    Pellet:
+        id: p12_9
+        gridpos: 12, 9
+        size: root.width/20, root.height/11.25
+        pos: 12*root.width/20, 9*root.height/11.25
+    Pellet:
+        id: p13_1
+        gridpos: 13, 1
+        size: root.width/20, root.height/11.25
+        pos: 13*root.width/20, 1*root.height/11.25
+    Pellet:
+        id: p13_2
+        gridpos: 13, 2
+        size: root.width/20, root.height/11.25
+        pos: 13*root.width/20, 2*root.height/11.25
+    Pellet:
+        id: p13_3
+        gridpos: 13, 3
+        size: root.width/20, root.height/11.25
+        pos: 13*root.width/20, 3*root.height/11.25
+    Pellet:
+        id: p13_4
+        gridpos: 13, 4
+        size: root.width/20, root.height/11.25
+        pos: 13*root.width/20, 4*root.height/11.25
+    Pellet:
+        id: p13_5
+        gridpos: 13, 5
+        size: root.width/20, root.height/11.25
+        pos: 13*root.width/20, 5*root.height/11.25
+    Pellet:
+        id: p13_6
+        gridpos: 13, 6
+        size: root.width/20, root.height/11.25
+        pos: 13*root.width/20, 6*root.height/11.25
+    Pellet:
+        id: p13_7
+        gridpos: 13, 7
+        size: root.width/20, root.height/11.25
+        pos: 13*root.width/20, 7*root.height/11.25
+    Pellet:
+        id: p13_8
+        gridpos: 13, 8
+        size: root.width/20, root.height/11.25
+        pos: 13*root.width/20, 8*root.height/11.25
+    Pellet:
+        id: p13_9
+        gridpos: 13, 9
+        size: root.width/20, root.height/11.25
+        pos: 13*root.width/20, 9*root.height/11.25
+    Pellet:
+        id: p14_3
+        gridpos: 14, 3
+        size: root.width/20, root.height/11.25
+        pos: 14*root.width/20, 3*root.height/11.25
+    Pellet:
+        id: p14_5
+        gridpos: 14, 5
+        size: root.width/20, root.height/11.25
+        pos: 14*root.width/20, 5*root.height/11.25
+    Pellet:
+        id: p14_7
+        gridpos: 14, 7
+        size: root.width/20, root.height/11.25
+        pos: 14*root.width/20, 7*root.height/11.25
+    Pellet:
+        id: p15_1
+        gridpos: 15, 1
+        size: root.width/20, root.height/11.25
+        pos: 15*root.width/20, 1*root.height/11.25
+    Pellet:
+        id: p15_2
+        gridpos: 15, 2
+        size: root.width/20, root.height/11.25
+        pos: 15*root.width/20, 2*root.height/11.25
+    Pellet:
+        id: p15_3
+        gridpos: 15, 3
+        size: root.width/20, root.height/11.25
+        pos: 15*root.width/20, 3*root.height/11.25
+    Pellet:
+        id: p15_5
+        gridpos: 15, 5
+        size: root.width/20, root.height/11.25
+        pos: 15*root.width/20, 5*root.height/11.25
+    Pellet:
+        id: p15_7
+        gridpos: 15, 7
+        size: root.width/20, root.height/11.25
+        pos: 15*root.width/20, 7*root.height/11.25
+    Pellet:
+        id: p15_8
+        gridpos: 15, 8
+        size: root.width/20, root.height/11.25
+        pos: 15*root.width/20, 8*root.height/11.25
+    Pellet:
+        id: p15_9
+        gridpos: 15, 9
+        size: root.width/20, root.height/11.25
+        pos: 15*root.width/20, 9*root.height/11.25
+    Pellet:
+        id: p16_1
+        gridpos: 16, 1
+        size: root.width/20, root.height/11.25
+        pos: 16*root.width/20, 1*root.height/11.25
+    Pellet:
+        id: p16_3
+        gridpos: 16, 3
+        size: root.width/20, root.height/11.25
+        pos: 16*root.width/20, 3*root.height/11.25
+    Pellet:
+        id: p16_4
+        gridpos: 16, 4
+        size: root.width/20, root.height/11.25
+        pos: 16*root.width/20, 4*root.height/11.25
+    Pellet:
+        id: p16_5
+        gridpos: 16, 5
+        size: root.width/20, root.height/11.25
+        pos: 16*root.width/20, 5*root.height/11.25
+    Pellet:
+        id: p16_6
+        gridpos: 16, 6
+        size: root.width/20, root.height/11.25
+        pos: 16*root.width/20, 6*root.height/11.25
+    Pellet:
+        id: p16_7
+        gridpos: 16, 7
+        size: root.width/20, root.height/11.25
+        pos: 16*root.width/20, 7*root.height/11.25
+    Pellet:
+        id: p16_9
+        gridpos: 16, 9
+        size: root.width/20, root.height/11.25
+        pos: 16*root.width/20, 9*root.height/11.25
+    Pellet:
+        id: p17_1
+        gridpos: 17, 1
+        size: root.width/20, root.height/11.25
+        pos: 17*root.width/20, 1*root.height/11.25
+    Pellet:
+        id: p17_5
+        gridpos: 17, 5
+        size: root.width/20, root.height/11.25
+        pos: 17*root.width/20, 5*root.height/11.25
+    Pellet:
+        id: p17_9
+        gridpos: 17, 9
+        size: root.width/20, root.height/11.25
+        pos: 17*root.width/20, 9*root.height/11.25
+    Pellet:
+        id: p18_2
+        gridpos: 18, 2
+        size: root.width/20, root.height/11.25
+        pos: 18*root.width/20, 2*root.height/11.25
+    Pellet:
+        id: p18_3
+        gridpos: 18, 3
+        size: root.width/20, root.height/11.25
+        pos: 18*root.width/20, 3*root.height/11.25
+    Pellet:
+        id: p18_4
+        gridpos: 18, 4
+        size: root.width/20, root.height/11.25
+        pos: 18*root.width/20, 4*root.height/11.25
+    Pellet:
+        id: p18_5
+        gridpos: 18, 5
+        size: root.width/20, root.height/11.25
+        pos: 18*root.width/20, 5*root.height/11.25
+    Pellet:
+        id: p18_6
+        gridpos: 18, 6
+        size: root.width/20, root.height/11.25
+        pos: 18*root.width/20, 6*root.height/11.25
+    Pellet:
+        id: p18_7
+        gridpos: 18, 7
+        size: root.width/20, root.height/11.25
+        pos: 18*root.width/20, 7*root.height/11.25
+    Pellet:
+        id: p18_8
+        gridpos: 18, 8
+        size: root.width/20, root.height/11.25
+        pos: 18*root.width/20, 8*root.height/11.25
+    
+    Pill:
+        id: pill1_1
+        gridpos: 1, 1
+        size: root.width/20, root.height/11.25
+        pos: 1*root.width/20, 1*root.height/11.25
+    Pill:
+        id: pill1_9
+        gridpos: 1, 9
+        size: root.width/20, root.height/11.25
+        pos: 1*root.width/20, 9*root.height/11.25
+    Pill:
+        id: pill18_1
+        gridpos: 18, 1
+        size: root.width/20, root.height/11.25
+        pos: 18*root.width/20, 1*root.height/11.25
+    Pill:
+        id: pill18_9
+        gridpos: 18, 9
+        size: root.width/20, root.height/11.25
+        pos: 18*root.width/20, 9*root.height/11.25
+    
+    PacMan:
+        id: pacman
+        size: root.width/20, root.height/11.25
+        source: 'pacman_right.png'
+        pos: 0*root.width/20, 5*root.height/11.25
+    
+    Ghost:
+        id: red
+        size: root.width/20, root.height/11.25
+        color: 'red'
+        source: 'red_front.png'
+        pos: 8*root.width/20, 5*root.height/11.25
+    
+    Ghost:
+        id: orange
+        size: root.width/20, root.height/11.25
+        color: 'orange'
+        source: 'orange_front.png'
+        pos: 9*root.width/20, 5*root.height/11.25
+    
+    Ghost:
+        id: teal
+        size: root.width/20, root.height/11.25
+        color: 'teal'
+        source: 'teal_front.png'
+        pos: 10*root.width/20, 5*root.height/11.25
+    
+    Ghost:
+        id: pink
+        size: root.width/20, root.height/11.25
+        color: 'pink'
+        source: 'pink_front.png'
+        pos: 11*root.width/20, 5*root.height/11.25

@@ -1,0 +1,3 @@
+title=PacDroid
+author=Gerard Louw
+orientation=landscape
